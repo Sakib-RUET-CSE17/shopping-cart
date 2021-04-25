@@ -15,7 +15,7 @@
     <section>
         <div class="container">
             <div class="cart">
-                <div class="col-md-12 col-lg-10 mx-auto">
+                <div class="col-md-12 col-lg-10 mx-auto classForEvent">
                     <div class="cart-item">
                         <div class="row">
                             <div class="col-md-7 center-item">
@@ -101,11 +101,12 @@
         }
 
         function addQty(element, i) {
-            console.log(element, i, element.children[1].value)
+            console.log(element.parentNode.childNodes[3].childNodes[1].innerText)
+                // console.log(element, i, element.children[1].value)
             const qty = ++element.children[1].value
-            const currentAmount = parseFloat(document.getElementsByClassName('price')[i].innerText)
+            const currentAmount = parseFloat(element.parentNode.childNodes[3].childNodes[1].innerText)
             const amountToAdd = unitPrice[i];
-            document.getElementsByClassName('price')[i].innerText = currentAmount + amountToAdd
+            element.parentNode.childNodes[3].childNodes[1].innerText = currentAmount + amountToAdd
             updateTotal(amountToAdd)
 
 
@@ -114,9 +115,9 @@
         function lessQty(element, i) {
             console.log(element, i, element.children[1].value)
             const qty = --element.children[1].value
-            const currentAmount = parseFloat(document.getElementsByClassName('price')[i].innerText)
+            const currentAmount = parseFloat(element.parentNode.childNodes[3].childNodes[1].innerText)
             const amountToUpdate = -1 * unitPrice[i];
-            document.getElementsByClassName('price')[i].innerText = currentAmount + amountToUpdate
+            element.parentNode.childNodes[3].childNodes[1].innerText = currentAmount + amountToUpdate
             updateTotal(amountToUpdate)
             if (qty <= 1) {
                 element.children[0].disabled = true
@@ -141,11 +142,16 @@
         notDeterminedYet()
 
         function removeQty(element, i) {
-            const amountToLess = -1 * parseFloat(document.getElementsByClassName('price')[i].innerText)
+
+            console.log(element)
+            const amountToLess = -1 * parseFloat(element.parentNode.childNodes[3].childNodes[1].innerText)
             updateTotal(amountToLess)
             const child = element.parentNode.parentNode.parentNode
             const parent = child.parentNode
+            console.log(child)
             parent.removeChild(child)
+                //handleRemoveBtn()
+                //notDeterminedYet()
         }
 
         function handleRemoveBtn() {
